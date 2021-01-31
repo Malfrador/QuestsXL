@@ -1,0 +1,11 @@
+name: QuestsXL
+version: ${project.version}
+main: de.erethon.questsxl.QuestsXL
+api-version: 1.16
+authors: [ Malfrador ]
+website: erethon.de
+depend: [ProtocolLib]
+commands:
+  questsxl:
+    description: Reference command for QXL
+    aliases: [qxl,q,quests,quest]

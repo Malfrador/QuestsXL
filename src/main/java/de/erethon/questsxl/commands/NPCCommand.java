@@ -11,9 +11,6 @@ public class NPCCommand extends DRECommand {
 
     QuestsXL plugin = QuestsXL.getInstance();
 
-    boolean isSettingUp = false;
-    RecordingSession session;
-
     public NPCCommand() {
         setCommand("npc");
         setAliases("n");

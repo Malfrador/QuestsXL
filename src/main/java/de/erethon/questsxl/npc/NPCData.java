@@ -7,6 +7,8 @@ import java.util.Map;
 
 public class NPCData {
 
+    // Gets saved in the PersistentDataContainer of the entity
+
     private String displayname;
     private EntityType displayEntity = EntityType.PLAYER;
     private transient Map<Integer, String> messages = new HashMap<>(); // Chance or Order, messageText

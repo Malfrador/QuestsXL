@@ -3,13 +3,18 @@ package de.erethon.questsxl.commands;
 import de.erethon.commons.chat.MessageUtil;
 import de.erethon.commons.command.DRECommand;
 import de.erethon.questsxl.QuestsXL;
+import de.erethon.questsxl.action.QCutscene;
 import de.erethon.questsxl.action.recorder.RecordingSession;
+import de.erethon.questsxl.players.QPlayer;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.scoreboard.*;
 
 public class ActionCommand extends DRECommand implements Listener {
 
@@ -31,6 +36,10 @@ public class ActionCommand extends DRECommand implements Listener {
     @Override
     public void onExecute(String[] args, CommandSender commandSender) {
         Player player = (Player) commandSender;
+        if (args[1].equals("cutscene") || args[1].equals("c")) {
+            new QCutscene().play(player);
+            return;
+        }
         if (args[1].equals("record") || args[1].equals("r")) {
             if (args.length >= 3 && (args[2].equals("f") || args[2].equals("finish"))) {
                 isSettingUp = false;

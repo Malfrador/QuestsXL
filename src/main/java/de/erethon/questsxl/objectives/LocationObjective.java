@@ -8,12 +8,18 @@ import org.bukkit.event.player.PlayerMoveEvent;
 public class LocationObjective extends QBaseObjective implements QObjective {
 
     Location location;
-    int distance;
+    int distance = 2;
     QPlayer player;
+
+    public LocationObjective(Location location) {
+        this.location = location;
+        registerEvents(this);
+    }
 
     public LocationObjective(Location location, int distance) {
         this.location = location;
         this.distance = distance;
+        registerEvents(this);
     }
 
     @Override
@@ -35,6 +41,7 @@ public class LocationObjective extends QBaseObjective implements QObjective {
         if (event.getTo().distance(location) < distance) {
             plugin.getServer().getPluginManager().callEvent(new ObjectiveCompleteEvent(this, player));
             plugin.debug("Obj " + getDisplayText() + " completed for " + player.getPlayer().getName());
+            unregister(this);
         }
 
     }

@@ -20,6 +20,10 @@ public class QPlayer {
     private final Map<QQuest, Long> completedQuests = new HashMap<>();
     private final Set<ActiveObjective> currentObjectives = new HashSet<>();
 
+    public QPlayer(Player player) {
+        this.player = player;
+    }
+
     public void startQuest(QQuest quest) {
         activeQuests.put(new ActiveQuest(this, quest), System.currentTimeMillis());
         startedQuests.put(quest, System.currentTimeMillis());

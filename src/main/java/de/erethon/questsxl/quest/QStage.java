@@ -35,7 +35,7 @@ public class QStage {
         Set<QCondition> failed = new HashSet<>();
         boolean canStart = true;
         for (QCondition condition : conditions) {
-            if (!condition.check()) {
+            if (!condition.check(player)) {
                 canStart = false;
                 failed.add(condition);
             }

@@ -1,21 +1,24 @@
 package de.erethon.questsxl.players;
 
+import de.erethon.commons.chat.MessageUtil;
 import de.erethon.questsxl.QuestsXL;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-public class QPlayerCache {
-
+public class QPlayerCache implements Listener {
 
     QuestsXL plugin = QuestsXL.getInstance();
 
-
-    private Set<QPlayer> players = new HashSet<>();
+    private final Set<QPlayer> players = new HashSet<>();
 
     public QPlayerCache() {
         for (Player player : Bukkit.getOnlinePlayers()) {
@@ -34,6 +37,22 @@ public class QPlayerCache {
             }
         }
         return null;
+    }
+
+    @EventHandler
+    public void loginEvent(PlayerJoinEvent event) {
+        Player player = event.getPlayer();
+        if (get(player) != null) {
+            MessageUtil.log("Player already loaded.");
+            return;
+        }
+        players.add(new QPlayer(player));
+        MessageUtil.log("Loaded data for " + player.getName());
+    }
+
+    @EventHandler
+    public void logoffEvent(PlayerQuitEvent event) {
+        players.remove(get(event.getPlayer()));
     }
 
     public static File getFile(UUID uuid) {

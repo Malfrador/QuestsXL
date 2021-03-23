@@ -1,31 +1,36 @@
 package de.erethon.questsxl.objectives;
 
 import de.erethon.questsxl.players.QPlayer;
+import de.erethon.questsxl.quest.QuestMarkerType;
 import org.bukkit.Location;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerMoveEvent;
 
-public class LocationObjective extends QBaseObjective implements QObjective {
+public class LocationObjective extends LocationBasedObjective implements QObjective {
 
-    Location location;
-    int distance = 2;
     QPlayer player;
 
     public LocationObjective(Location location) {
         this.location = location;
-        registerEvents(this);
     }
 
     public LocationObjective(Location location, int distance) {
         this.location = location;
         this.distance = distance;
-        registerEvents(this);
     }
 
     @Override
     public void setup(QPlayer p) {
         player = p;
         registerEvents(this);
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public int getDistance() {
+        return distance;
     }
 
     @Override

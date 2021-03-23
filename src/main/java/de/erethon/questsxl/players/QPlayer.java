@@ -4,6 +4,10 @@ import de.erethon.commons.chat.MessageUtil;
 import de.erethon.questsxl.objectives.ActiveObjective;
 import de.erethon.questsxl.quest.ActiveQuest;
 import de.erethon.questsxl.quest.QQuest;
+import org.bukkit.Bukkit;
+import org.bukkit.boss.BarColor;
+import org.bukkit.boss.BarStyle;
+import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -14,6 +18,7 @@ import java.util.Set;
 public class QPlayer {
 
     Player player;
+    BossBar bar;
 
     private final Map<ActiveQuest, Long> activeQuests = new HashMap<>();
     private final Map<QQuest, Long> startedQuests = new HashMap<>();
@@ -22,6 +27,12 @@ public class QPlayer {
 
     public QPlayer(Player player) {
         this.player = player;
+        bar = Bukkit.getServer().createBossBar("qxl_" + player.getName(), BarColor.GREEN, BarStyle.SOLID);
+        bar.addPlayer(player);
+    }
+
+    public BossBar getBar() {
+        return bar;
     }
 
     public void startQuest(QQuest quest) {
